@@ -100,13 +100,13 @@ jobs:
         uses: onichandame/docker-registry-sync-action@1.0.0
         with:
           # the source repository
-          source_repository: ${{ env.REGISTRY }}
+          source_repository: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           # the username for the source registry
           source_username: ${{ github.actor }}
           # the password for the source registry
           source_password: ${{ secrets.GITHUB_TOKEN }}
           # the target repository
-          target_repository: hub.docker.com
+          target_repository: hub.docker.com/${{ env.IMAGE_NAME }}
           # the username for the target registry
           target_username: ${{ github.actor }}
           # the password for the target registry
