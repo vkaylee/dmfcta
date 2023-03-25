@@ -61,3 +61,5 @@ do
   # Monitor file changes for the files in the 'actionFiles' array, and perform the 'asActions' action when changes are detected
   printf "%s\n" ${actionFiles[*]} | entr -s "${asActions[${k}]}" > "/applogs/action${k}.log" 2>&1 &
 done
+
+tail -n 1 -f /applogs/*.log
