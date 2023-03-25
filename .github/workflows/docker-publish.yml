@@ -106,7 +106,7 @@ jobs:
           # the password for the source registry
           source_password: ${{ secrets.GITHUB_TOKEN }}
           # the target repository
-          target_repository: hub.docker.com/${{ env.IMAGE_NAME }}:main
+          target_repository: registry.hub.docker.com/${{ env.IMAGE_NAME }}:main
           # the username for the target registry
           target_username: ${{ github.actor }}
           # the password for the target registry
