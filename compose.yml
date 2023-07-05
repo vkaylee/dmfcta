@@ -1,13 +1,21 @@
-# dmfcta
-Docker container for monitoring file changes to do action
-
-This is an example `compose.yml` to use this tool, the feature is like hot-reload
-```yaml
+volumes:
+  go:
 services:
   app:
-    image: ghcr.io/vleedev/dmfcta:main
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    working_dir: /app
     volumes:
+      - go:/go
+      - ./go.mod:/app/go.mod:ro
+      - ./go.sum:/app/go.sum:ro
+      - ./main.go:/app/main.go:ro
+      - ./action:/app/action:ro
+      - ./apputils:/app/apputils:ro
       - ./test/sample:/app/test/sample:ro
+    command: nodemon --watch './**/*.go' --signal SIGTERM --exec 'go' run main.go
     environment:
       # Declare keys to indicate app to take envs
       # If we don't set, the default one will be used
@@ -36,4 +44,3 @@ services:
       CRITERIA_4: /app/test/sample/test4.txt
       ACTION_4: echo test4; sleep 10; echo ok
       TIMEOUT_4: 2
-```
